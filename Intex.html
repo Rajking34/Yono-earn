@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yono Earn - Download Your Favorite Apps and Games</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 25%, #feca57 50%, #48dbfb 75%, #0abde3 100%); 
+            color: #fff; 
+            line-height: 1.6; 
+            min-height: 100vh; 
+            animation: backgroundShift 10s ease infinite;
+        }
+        @keyframes backgroundShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .header { 
+            background: rgba(0, 0, 0, 0.4); 
+            backdrop-filter: blur(12px); 
+            padding: 40px 20px; 
+            text-align: center; 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); 
+        }
+        .header h1 { 
+            font-size: 3em; 
+            margin-bottom: 15px; 
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6); 
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff6b6b; }
+            to { text-shadow: 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ee5a24; }
+        }
+        .header p { font-size: 1.4em; opacity: 0.9; }
+        .container { max-width: 1300px; margin: 50px auto; padding: 0 20px; }
+        .container h2 { 
+            text-align: center; 
+            font-size: 2.5em; 
+            margin-bottom: 40px; 
+            color: #fff; 
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); 
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        .link-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .link-item { 
+            background: rgba(255, 255, 255, 0.15); 
+            border-radius: 20px; 
+            padding: 25px; 
+            text-align: center; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); 
+            transition: all 0.4s ease; 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(10px); 
+            position: relative; 
+        }
+        .link-item:hover { 
+            transform: translateY(-12px) scale(1.03); 
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); 
+        }
+        .link-item img { 
+            width: 140px; 
+            height: 140px; 
+            border-radius: 15px; 
+            margin-bottom: 20px; 
+            object-fit: cover; 
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); 
+            border: 3px solid rgba(255, 255, 255, 0.3); 
+        }
+        .bonus-badge { 
+            position: absolute; 
+            top: 15px; 
+            right: 15px; 
+            background: linear-gradient(45deg, #ffd700, #ffed4e); 
+            color: #c90000; 
+            font-weight: bold; 
+            padding: 8px 15px; 
+            border-radius: 25px; 
+            font-size: 0.9em; 
+            box-shadow: 0 4px 15px rgba(255,215,0,0.5);
+            animation: pulse 2s infinite; 
+            z-index: 10;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .link-item h3 { 
+            color: #fff; 
+            margin-bottom: 18px; 
+            font-size: 1.5em; 
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5); 
+        }
+        .link-item a { 
+            display: inline-block; 
+            background: linear-gradient(45deg, #00c853, #00b140); 
+            color: white; 
+            padding: 14px 35px; 
+            text-decoration: none; 
+            border-radius: 50px; 
+            font-weight: bold; 
+            font-size: 1.1em; 
+            transition: all 0.3s ease; 
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5); 
+        }
+        .link-item a:hover { 
+            background: linear-gradient(45deg, #00b140, #00c853); 
+            transform: scale(1.08); 
+            box-shadow: 0 10px 30px rgba(0, 200, 83, 0.7); 
+        }
+        footer { 
+            background: rgba(0, 0, 0, 0.5); 
+            color: #ddd; 
+            text-align: center; 
+            padding: 25px; 
+            margin-top: 60px; 
+            font-size: 0.95em; 
+        }
+        .telegram-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: linear-gradient(45deg, #0088cc, #00aaff);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            box-shadow: 0 8px 25px rgba(0, 136, 204, 0.5);
+            animation: colorChange 2s infinite, float 3s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .telegram-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(0, 136, 204, 0.7);
+        }
+        @keyframes colorChange {
+            0% { background: linear-gradient(45deg, #0088cc, #00aaff); }
+            25% { background: linear-gradient(45deg, #00aaff, #0088cc); }
+            50% { background: linear-gradient(45deg, #00cc00, #00ff00); }
+            75% { background: linear-gradient(45deg, #00ff00, #00cc00); }
+            100% { background: linear-gradient(45deg, #0088cc, #00aaff); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        @media (max-width: 768px) { 
+            .header h1 { font-size: 2.2em; } 
+            .header p { font-size: 1.1em; } 
+            .link-grid { grid-template-columns: 1fr; } 
+            .link-item img { width: 120px; height: 120px; }
+            .bonus-badge { font-size: 0.8em; padding: 6px 12px; }
+            .telegram-button { bottom: 10px; left: 10px; font-size: 1em; padding: 12px 16px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="https://t.me/+QjeSf8Zt3tQzYTA9" target="_blank" class="telegram-button">
+        📱 Telegram Logo - Join Channel for Daily Free Bonus Codes! 🚀
+    </a>
+
+    <header class="header">
+        <h1>🎮 Welcome to Yono Earn 🎮</h1>
+        <p>Download your favorite apps and games here and start earning! 🔥</p>
+    </header>
+
+    <div class="container">
+        <h2>💰 Available Downloads - ₹500 BONUS ON 10+ GAMES! 💰</h2>
+        <div class="link-grid">
+            <div class="link-item">
+                <img src="https://imgs.search.brave.com/S0MnvRsnNSIosa0piLYOfx2VBNG36ZYnv8QDg7-3weM/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9wbGF5/eW9ub2dhbWVzLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/NS8wMy95b25vLWFy/Y2FkZS53ZWJw" alt="Yono Arcade">
+                <div class="bonus-badge">🎁 ₹500</div>
+                <h3>1. Yono Arcade</h3>
+                <a href="https://yonoarcadeapp3.com/?code=F55SBZZ7NVA&t=1769031530" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://imgs.search.brave.com/i4uv1fZX0Vx2GecIfvBtkepn7V0l0bBbiD2g-hAsWp0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly95b25v/dmlwLmlvL2ltZy95/b25vLWdhbWVzLWFw/ay1sb2dvLndlYnA" alt="Yono Games">
+                <div class="bonus-badge">🎁 ₹500</div>
+                <h3>2. Yono Games</h3>
+                <a href="https://yonogames8.com/?code=ZEH42WK5&t=1768953143" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://s3-eu-west-1.amazonaws.com/tpd/logos/67c2b480fa82955c6194e8d4/0x0.png" alt="Yono Rummy">
+                <div class="bonus-badge">🎁 ₹500</div>
+                <h3>3. Yono Rummy</h3>
+                <a href="https://yonorummy009.com/?code=VIPA4TMUE6A&t=1768953316" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/19/8a/f9/198af9fa-29dd-c568-31b2-e67e585757fc/AppIcon-1x_U007emarketing-0-7-0-85-220.png/1200x630wa.jpg" alt="Teen Patti">
+                <div class="bonus-badge">🎁 ₹500</div>
+                <h3>4. Teen Patti</h3>
+                <a href="https://www.earntp.com/m/dcioy" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://images.sftcdn.net/images/t_app-cover-s-16-9,f_auto/p/7d002314-a7d7-433c-9465-8b99e69872e5/3566259477/spin-101-screenshot" alt="Spin 101">
+                <div class="bonus-badge">🎁 ₹500</div>
+                <h3>5. Spin 101</h3>
+                <a href="https://spin101j.com/?code=P4CRUGJFBXB&t=1768953639" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://imgs.search.brave.com/6_QtCnvhTd-CnkF59N0hHz1Jwh3r--CsLnanpkMiAhE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cHJvc2FmZWltZy5j/b20vdXBsb2Fkcy8y/MDI1MTIxMS82OTNh/OTRiMTdiOTA5LnBu/Zw" alt="Jaiho Slots">
+                <div class="bonus-badge">🎁 ₹500</div>
+                <h3>6. Jaiho Slots</h3>
+                <a href="https://www.jaihoslots23.com/?code=EGPLSLSURTS&t=1768953731" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://imgs.search.brave.com/1iaHfQnDeyjH-pku6SuqOUkXubyMU3ZJlUBbdmU18HE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zbG90/c3dpbm5lcnlvbm8u/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDI0LzA3L2Nyb3Bw/ZWQtc2xvdHMtd2lu/bmVyLXlvbm8tbG9n/by0xNTB4MTUwLnBu/Zw" alt="Slots Winner">
+                <div class="bonus-badge">🎁 ₹500</div>
+                <h3>7. Slots Winner</h3>
+                <a href="https://slotswinnerg.com/?code=K4E9Q5W8S89&t=1768953984" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://imgs.search.brave.com/iclqhzeD5OElsA0MUu3owrA9NeA2Etang13xrgtbOJE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly95b25v/Z2FtZWFwcC5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjUv/MDEvU3Bpbi1XaW5u/ZXItMTUweDE1MC5w/bmc" alt="Spin Winner">
+                <div class="bonus-badge">🎁 ₹500</div>
+                <h3>8. Spin Winner</h3>
+                <a href="https://t.me/+QjeSf8Zt3tQzYTA9" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=10160155858568124" alt="Yn 777">
+                <div class="bonus-badge">🎁 ₹500</div>
+                <h3>9. Yn 777</h3>
+                <a href="https://www.y754.com/?code=4SWHD4A8D8H&t=1768954147" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://play-lh.googleusercontent.com/DBxmti51vQprGbbNSzyXzALjfzwQh0hK5sjiwYWMdEXQonyWAkXHKj-9Z4tafuTWnQ=w526-h296-rw" alt="Ind Rummy">
+                <div class="bonus-badge">🎁 ₹250 BONUS</div>
+                <h3>10. Ind Rummy</h3>
+                <a href="https://indrummybet6.com/?code=2BA6JLB1LRG&t=1768954558" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://juliettestore10.com/media/Ico/rummy-new.jpg" alt="Abc Rummy">
+                <div class="bonus-badge">🎁 ₹300 BONUS</div>
+                <h3>11. Abc Rummy</h3>
+                <a href="https://www.9abcrummy.com/?code=75CX1NMMWKH&t=1768954681" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://allrummynet.com/wp-content/uploads/2024/05/20240502_224821_0000.png" alt="789 Jackpot">
+                <div class="bonus-badge">🎁 ₹200 BONUS</div>
+                <h3>12. 789 Jackpot</h3>
+                <a href="https://789jackpots789.net/?code=J7ZNP2YGC28&t=1769010010" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://www.appbrain.com/share-img?pkg=com.offroad.ozogames&width=764&height=400&maxCacheSeconds=3600" alt="101z">
+                <div class="bonus-badge">🎁 ₹275 BONUS</div>
+                <h3>13. 101z</h3>
+                <a href="https://101z9.vip/?code=398RWCA77W7&t=1769032078" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c3/52/bc/c352bc89-4881-6db0-46a0-19c02819d54b/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/1200x630wa.png" alt="Bet 123">
+                <div class="bonus-badge">🎁 ₹225 BONUS</div>
+                <h3>14. Bet 123</h3>
+                <a href="https://www.bet213app.com/?code=2QT93G9SEEQ&t=1768955356" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple125/v4/2d/8a/86/2d8a8621-0ae4-fb6c-aa91-64b98718113d/AppIcon-1x_U007emarketing-0-9-0-85-220.png/1200x630wa.png" alt="Bingo 101">
+                <div class="bonus-badge">🎁 ₹300 BONUS</div>
+                <h3>15. Bingo 101</h3>
+                <a href="https://bingo101ee.net/?code=6YFJPVFR3WB&t=1768955479" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=10159209624480965" alt="Boss Rummy">
+                <div class="bonus-badge">🎁 ₹250 BONUS</div>
+                <h3>16. Boss Rummy</h3>
+                <a href="https://www.bossrummyy.com/?code=9HFA8Q2CUEZ&t=1768955720" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/cb/f4/f3/cbf4f3ff-5b7f-03ed-ef64-03e85137474f/AppIcon-0-0-1x_U007epad-0-85-220.png/1200x630wa.jpg" alt="Club Lnr">
+                <div class="bonus-badge">🎁 ₹200 BONUS</div>
+                <h3>17. Club Lnr</h3>
+                <a href="https://clubinr6.com/?code=9VCMQXW4BXL&t=1769003366" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://static-wazdan.com/vault/assets/87/579847db53e7d609f27338deedbf5c086c8f5af2647a6bed6961ea7197966a9f.jpg?save_as=HotSlot777CashOut_icon_960x720.jpg" alt="Even 777">
+                <div class="bonus-badge">🎁 ₹280 BONUS</div>
+                <h3>18. Even 777</h3>
+                <a href="https://ever777I.NET/?code=Y9AS6HCUBPL&t=1769003487" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/09/a6/64/09a6646e-9744-7e7b-1df0-a61f919c3471/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/1200x630wa.jpg" alt="Game Rummy">
+                <div class="bonus-badge">🎁 ₹225 BONUS</div>
+                <h3>19. Game Rummy</h3>
+                <a href="https://gamerummy.me/?code=Q6WSSNHSS8C&t=1769003560" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://tenerifeslow.com/media/Ico/rummy-new.jpg" alt="Gogo Rummy">
+                <div class="bonus-badge">🎁 ₹300 BONUS</div>
+                <h3>20. Gogo Rummy</h3>
+                <a href="https://www.gogogo777.asia/?code=8FWT6X4XMKD&t=1769003787" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://mqmbetapp.io/wp-content/uploads/2025/12/image-32.png" alt="Hi Rummy">
+                <div class="bonus-badge">🎁 ₹250 BONUS</div>
+                <h3>21. Hi Rummy</h3>
+                <a href="https://www.hirummyrefer.co/?code=RX312P4THWZ&t=1769004149" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://allrummyyono.com/wp-content/uploads/2025/10/1000124878-1024x538.png" alt="Hindi 777">
+                <div class="bonus-badge">🎁 ₹200 BONUS</div>
+                <h3>22. Hindi 777</h3>
+                <a href="https://www.hindi777refer.me/?code=7LFJ1ZW7KKD&t=1769004208" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/9c/b9/a2/9cb9a26f-143a-ab36-dd66-6319936dcfc7/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/1200x630wa.png" alt="Ind Club">
+                <div class="bonus-badge">🎁 ₹275 BONUS</div>
+                <h3>23. Ind Club</h3>
+                <a href="https://www.indcluba.com/?code=34UK3JGKMG9&t=1769004306" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/56/70/f4/5670f42c-6454-4d4a-e2e3-8baa3121c940/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/1200x630wa.png" alt="Ind Rummy">
+                <div class="bonus-badge">🎁 ₹225 BONUS</div>
+                <h3>24. Ind Rummy</h3>
+                <a href="https://indrummybet6.com/?code=2BA6JLB1LRG&t=1769004481" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://hayrummy.com/wp-content/uploads/2026/01/Untitled-design_20260104_131057_0000.png" alt="Inr Rummy">
+                <div class="bonus-badge">🎁 ₹300 BONUS</div>
+                <h3>25. Inr Rummy</h3>
+                <a href="https://inrrummy1.com/?code=8QUE3J96UTR&t=1769004854" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://apktodo.io/uploads/2025/2/jaiho-777-1.jpg" alt="Jaiho 777">
+                <div class="bonus-badge">🎁 ₹250 BONUS</div>
+                <h3>26. Jaiho 777</h3>
+                <a href="https://www.jaiho777agent.com/?code=GC2SLFFAZQB&t=1769004898" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/2b/72/d0/2b72d0a0-10cf-6c56-83a7-d015acacb939/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/1200x630wa.png" alt="Jaiho Arcade">
+                <div class="bonus-badge">🎁 ₹200 BONUS</div>
+                <h3>27. Jaiho Arcade</h3>
+                <a href="https://jaihoarcade30.com/?code=AZD8TMQBU5D&t=1769005095" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://tse-mm.bing.com/th?q=Jaiho%20Rummy%20daily%20bonus" alt="Jaiho Rummy">
+                <div class="bonus-badge">🎁 ₹280 BONUS</div>
+                <h3>28. Jaiho Rummy</h3>
+                <a href="https://jaihorummy.top/?code=E74HAB7JMXZ&t=1769005188" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=584899020981564" alt="Jaiho Slots">
+                <div class="bonus-badge">🎁 ₹225 BONUS</div>
+                <h3>29. Jaiho Slots</h3>
+                <a href="https://www.jaihoslotsvip.com/?code=EGPLSLSURTS&t=1769005305" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://images.sftcdn.net/images/t_app-cover-s-16-9,f_auto/p/61652b90-8be8-407d-bf3b-ad001d8d0221/1402037120/joy-rummy-screenshot" alt="Joy Rummy">
+                <div class="bonus-badge">🎁 ₹300 BONUS</div>
+                <h3>30. Joy Rummy</h3>
+                <a href="https://joyrummy.cc/?code=J5KKM35D4SK&t=1769005524" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://mqmbetapp.io/wp-content/uploads/2025/12/image-32.png" alt="Love Rummy">
+                <div class="bonus-badge">🎁 ₹250 BONUS</div>
+                <h3>31. Love Rummy</h3>
+                <a href="https://www.4loverummy.com/?code=AFCNPKDQX3X&t=1769005892" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://modfyp.com/uploads/2025/8/maha-games-apk.webp" alt="Maha Games">
+                <div class="bonus-badge">🎁 ₹200 BONUS</div>
+                <h3>32. Maha Games</h3>
+                <a href="https://mahagames.cc/?code=J24XVURUXU6&t=1769006018" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/da/e4/15/dae415b2-afa2-64c2-948b-7d2829c65fc7/AppIcon-0-0-1x_U007emarketing-0-7-0-0-85-220.png/1200x630wa.png" alt="Neta Vip">
+                <div class="bonus-badge">🎁 ₹275 BONUS</div>
+                <h3>33. Neta Vip</h3>
+                <a href="https://www.neta1.vip/?code=DR0NSYH29Z8&t=1769006670" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f0/67/7f/f0677f30-d6d2-aae2-6fc8-ca1f4b40490b/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/1200x630wa.jpg" alt="Ok Rummy">
+                <div class="bonus-badge">🎁 ₹225 BONUS</div>
+                <h3>34. Ok Rummy</h3>
+                <a href="https://www.okrummy26.com/?code=EZ4TDSPDY6U&t=1769007082" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://play-lh.googleusercontent.com/HaGDTp5gYH1dGeu1mpLCTGBnPBNBuJjm1J8J6QX3Evek4vvgPWw2CDk8SoqvyYjzWho=w526-h296-rw" alt="Rummy Lodu">
+                <div class="bonus-badge">🎁 ₹300 BONUS</div>
+                <h3>35. Rummy Lodu</h3>
+                <a href="https://rummyludoapp2.com/?code=WZTHPUWD86R&t=1769007421" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://lh3.googleusercontent.com/8ydUr22UP3gUeBicHX9k_KEM0mLLJgCcIE481OJyQ97L8_kpd_cvX8R2G6HU0cVPQDpSwlmnj6XgjaRmtyarbWACXxfAg7dMOazjkw=h200" alt="Rummy 77">
+                <div class="bonus-badge">🎁 ₹250 BONUS</div>
+                <h3>36. Rummy 77</h3>
+                <a href="https://rummy77a.com/?code=5FN9HK2426Q&t=1769007507" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/cc/d7/47/ccd747cc-6983-57ca-5a74-aa8d727466ed/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/1200x630wa.png" alt="Saga Slots">
+                <div class="bonus-badge">🎁 ₹200 BONUS</div>
+                <h3>37. Saga Slots</h3>
+                <a href="https://www.sagaslots1.com/?code=0QHWWWXSCGF&t=1769007778" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/09/5a/cc/095acce5-779d-aedd-4c71-ca5a88d892ac/AppIcon-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.jpg" alt="Slots Winner">
+                <div class="bonus-badge">🎁 ₹280 BONUS</div>
+                <h3>38. Slots Winner</h3>
+                <a href="https://slotswinnerg.com/?code=K4E9Q5W8S89&t=1769008063" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/8d/fb/66/8dfb668c-4180-3888-fd2f-a416d0e1e9bf/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/1200x630wa.png" alt="Spin 101">
+                <div class="bonus-badge">🎁 ₹225 BONUS</div>
+                <h3>39. Spin 101</h3>
+                <a href="https://spin101-l.vip/?code=P4CRUGJFBXB&t=1769008172" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/09/5a/cc/095acce5-779d-aedd-4c71-ca5a88d892ac/AppIcon-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.jpg" alt="Spin Gold">
+                <div class="bonus-badge">🎁 ₹300 BONUS</div>
+                <h3>40. Spin Gold</h3>
+                <a href="https://spingoldvipagent.cc/?code=HLTG1QVGN59&t=1769008360" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/8d/fb/66/8dfb668c-4180-3888-fd2f-a416d0e1e9bf/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/1200x630wa.png" alt="Yes Spin">
+                <div class="bonus-badge">🎁 ₹250 BONUS</div>
+                <h3>41. Yes Spin</h3>
+                <a href="https://www.yesspin88.com/?code=47THRM7998H&t=1769008543" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple7/v4/3e/b1/ba/3eb1baa5-4b54-d33a-6c0e-8036999544b2/mzl.rechjgyd.jpg/1200x630wa.png" alt="777 Games">
+                <div class="bonus-badge">🎁 ₹200 BONUS</div>
+                <h3>42. 777 Games</h3>
+                <a href="https://www.777inwin.com/?code=H53898Y94WS&t=1769009031" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://images.sftcdn.net/images/t_app-cover-s-16-9,f_auto/p/1f129d68-82cb-4529-a1d4-cc4ac916010f/2760682302/yono-vip-mind-games-screenshot" alt="Yono Vip">
+                <div class="bonus-badge">🎁 ₹275 BONUS</div>
+                <h3>43. Yono Vip</h3>
+                <a href="https://uonovip6.com/?code=3CRWDBJ5LQW&t=1769009081" target="_blank">Download Now</a>
+            </div>
+            <div class="link-item">
+                <img src="https://play-lh.googleusercontent.com/8ydUr22UP3gUeBicHX9k_KEM0mLLJgCcIE481OJyQ97L8_kpd_cvX8R2G6HU0cVPQDpSwlmnj6XgjaRmtyarbWACXxfAg7dMOazjkw=512" alt="Extra Game">
+                <div class="bonus-badge">🎁 ₹225 BONUS</div>
+                <h3>44. Extra Game</h3>
+                <a href="https://example.com/extra" target="_blank">Download Now</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2023 Yono Earn. All rights reserved.</p>
+    </footer>
+</body>
+</html>
